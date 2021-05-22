@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+html {
+    background: unset;
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.background.bottom-gradient {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.56) 0%, rgba(255, 255, 255, 0) 23%);
+}
+
+button.rpgui-button {
+    font-family: 'ZFTERMIN__' !important;
+    font-size: 13pt;
+}
+
+/* Hero */
+
+.hero.has-background {
+    position: relative;
+    overflow: hidden;
+    font-family: 'Kanit', sans-serif;
+}
+
+.hero-background {
+    position: absolute;
+    object-fit: cover;
+    object-position: center center;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-body {
+    z-index: 5;
+}
+
+#bgVideo {
+    position: fixed !important;
+    object-fit: cover;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.hero-background.is-transparent {
+    opacity: 0.3;
+}
+
+.hero-title {
+    position: relative;
+    top: 45px;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Navbar */
+
+.las {
+    margin-right: 0.3em;
+    display: inline-block;
+}
+
+.navbar.is-transparent, .navbar-menu, .navbar-dropdown, .navbar-divider {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* SHOP */
+
+.shop-hero {
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.shop-hero>.shop-hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-avatar {
+    height: 100%;
+    float: left;
+    margin-right: 0.5em;
+}
+
+.payment-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+.topup-panel {
+    position: absolute;
+    top: -150px;
+    left: 0;
+    right: 0;
+}
+
+/* copyright */
+
+.copyright-bottom {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copyright-bottom {
+    display: block;
+}
+
+.copyright-bottom>.copyright-img {
+    width: 46px;
+    float: left;
+    margin-right: 8px;
+}
+
+.copyright-bottom>.copyright-text {
+    line-height: 14px;
+    font-size: 9pt;
+}
+
+.copyright-bottom>.ssl-img {
+    width: 110px;
+    float: right;
+}
+
+/* Scroll for more */
+
+.moving-mouse-holder {
+    position: relative;
+    top: -50px;
+    margin: auto;
+    margin-top: 60px;
+    width: 170px;
+    z-index: 2;
+}
+
+.moving-mouse-holder .mouse {
+    width: 26px;
+    height: 40px;
+    position: relative;
+    right: 0;
+    border-radius: 18px;
+    border: 2px solid #919191;
+}
+
+.moving-mouse-holder .mouse-button {
+    background-color: #919191;
+    width: 4px;
+    height: 10px;
+    border-radius: 2px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin: 0 0 0 -2px;
+    animation: mouse-scroll 1s infinite alternate;
+}
+
+.moving-mouse-holder .text {
+    margin-top: -37px;
+    margin-left: 40px;
+    color: #33cc66;
+    font-size: 14px;
+    line-height: 1.1em;
+}
+
+@keyframes mouse-scroll {
+    to {
+        transform: translate(0, 6px) scale(1, 0.8);
+    }
+}
+
+/* RPGUI */
+
+.rpgui-container {
+    position: unset !important;
+}

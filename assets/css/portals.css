@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+body {
+    font-family: 'Kanit', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    /* background: url('../images/background-main.jpg'); */
+    animation: AnimateBackground2 30s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    animation-iteration-count: infinite;
+    /* if you are doing your keyframes from 0 to 50 to 100% then forwards */
+    animation-direction: forwards;
+    /* if you are doing your keyframes from 0 to 100% then alternate
+    so it `bounces` 0 to 100% then 100% to 0 and so on.
+    */
+    animation-direction: alternate;
+}
+
+@keyframes AnimateBackground2 {
+    0% {
+        background: url('../img/portal-bg.png');
+    }
+    25% {
+        background: url('../img/portal-bg2.jpg');
+    }
+    50% {
+        background: url('../img/portal-bg3.png');
+    }
+    75% {
+        background: url('../img/portal-bg4.png');
+    }
+    100% {
+        background: url('../img/portal-bg5.jpg');
+    }
+}
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+div#selection-items {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+div#selection-items:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+a.selection-link {
+    color: white;
+    font-size: 1.7em;
+    line-height: 0px;
+    text-decoration: none;
+}
