@@ -16,6 +16,9 @@ Route::add('/shop/login',function(){
 Route::add('/shop/catalog',function(){
     include './pages/catalog.php';
 });
+Route::add('/shop/topup',function(){
+    include './pages/topup.php';
+});
 
 
 Route::run('/');

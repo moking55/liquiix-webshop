@@ -95,8 +95,7 @@ class Route
                     call_user_func_array(self::$methodNotAllowed, array($path, $method));
                 }
             } else {
-                echo '404';
-                //header("HTTP/1.0 404 Not Found");
+                header("HTTP/1.0 404 Not Found");
                 if (self::$pathNotFound) {
                     call_user_func_array(self::$pathNotFound, array($path));
                 }

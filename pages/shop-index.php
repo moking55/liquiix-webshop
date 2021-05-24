@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,14 +38,15 @@
                     </div>
                     <span id="typed"></span>
                 </h3>
-                <a class="button is-primary is-outlined"><i class="las la-store-alt"></i> เข้าสู่ร้านค้า</a>
-                <a class="button is-info is-outlined"><i class="las la-book-open"></i> คู่มือการเล่น</a>
+                <a href="/shop/catalog" class="button is-primary is-outlined"><i class="las la-store-alt"></i> เข้าสู่ร้านค้า</a>
+                <a href="/docs" class="button is-info is-outlined"><i class="las la-book-open"></i> คู่มือการเล่น</a>
             </div>
         </div>
     </div>
 
     <script src="/assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/custom.js"></script>
     <script src="/assets/js/particles.js"></script>
     <script>

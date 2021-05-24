@@ -52,9 +52,6 @@ else : ?>
                                                     <div class="control">
                                                         <button id="submitValue" name="submitValue" type="button" onclick="LoginChk()" class="button is-primary">เข้าสู่ระบบ</button>
                                                     </div>
-                                                    <div class="control">
-                                                        <button class="button is-outlined">ยกเลิก</button>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -76,7 +73,14 @@ else : ?>
         <script src="/assets/js/jquery-3.6.0.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="/assets/js/custom.js"></script>
-
+        <script>
+            $('form input').keydown(function(e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        </script>
     </body>
 
     </html>
