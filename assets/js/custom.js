@@ -186,3 +186,59 @@ function hideAll() {
     $("#TW_form").addClass("is-hidden");
     $("#History").addClass("is-hidden");
 }
+
+/* NewsAdd */
+function AddNews() {
+    $.ajax({
+        type: "POST",
+        url: "../../functions/NewsAdd.php",
+        data: $("#news_form").serialize(),
+        beforeSend: function () {
+            Swal.fire({
+                text: 'กำลังโหลด...',
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getHtmlContainer()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                            }
+                        }
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                },
+                allowOutsideClick: false
+            });
+        },
+        success: function (result) {
+            if (result.status == 1) // Success
+            {
+                Swal.fire({
+                    title: 'สำเร็จ',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.replace('/admin')
+                    }
+                })
+            } else // Err
+            {
+                Swal.fire({
+                    title: 'เกิดข้อผิดพลาด',
+                    text: result.message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                })
+            }
+        }
+    });
+}

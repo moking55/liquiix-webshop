@@ -19,6 +19,17 @@ Route::add('/shop/catalog',function(){
 Route::add('/shop/topup',function(){
     include './pages/topup.php';
 });
+Route::add('/news',function(){
+    include './pages/updates.php';
+});
 
+
+// Admin Route
+Route::add('/admin',function(){
+    include './pages/admin-index.php';
+});
+Route::add('/admin/news/add',function(){
+    include './pages/news-add.php';
+});
 
 Route::run('/');

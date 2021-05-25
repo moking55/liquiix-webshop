@@ -24,7 +24,7 @@
                 <a href="/news" class="navbar-item has-text-white">
                     ข่าวสาร
                 </a>
-                <a href="/docs" class="navbar-item has-text-white">
+                <a href="<?= $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https://':'http://'."docs.". $_SERVER['HTTP_HOST'] ?>" class="navbar-item has-text-white">
                     คู่มือการเล่น
                 </a>
 

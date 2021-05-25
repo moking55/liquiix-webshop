@@ -12,34 +12,42 @@
     <!-- custom css -->
     <link rel="stylesheet" href="/assets/css/styles.css">
     <!-- line awesome -->
-    <link rel="stylesheet"
-        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
-    
 
-    <?php include ('./components/nav.php'); ?>
+
+    <?php include('./components/nav.php'); ?>
 
     <canvas class="background"></canvas>
     <div class="hero is-fullheight is-dark has-background">
         <img alt="Title-image" class="hero-background is-transparent" src="./assets/img/portal-bg4.png" />
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    {{MCName}}
-
-                </h1>
-                <h3 class="subtitle">
-                    <div id="typed-strings">
-                        <p>ยินดีต้อนรับผู้เล่นทุกท่าน</p>
-                        <p>เข้าสู่โลกแห่ง <b>RPG</b> แห่ง {{MCName}}</p>
-                        <p>ที่ๆเต็มไปด้วยความลับและอันตราย</p>
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="title">
+                            {{MCName}}
+                        </h1>
+                        <h3 class="subtitle">
+                            <div id="typed-strings">
+                                <p>ยินดีต้อนรับผู้เล่นทุกท่าน</p>
+                                <p>เข้าสู่โลกแห่ง <b>RPG</b> แห่ง {{MCName}}</p>
+                                <p>ที่ๆเต็มไปด้วยความลับและอันตราย</p>
+                            </div>
+                            <span id="typed"></span>
+                        </h3>
+                        <a href="/shop/catalog" class="button is-primary is-outlined"><i class="las la-store-alt"></i> เข้าสู่ร้านค้า</a>
+                        <a href="/docs" class="button is-info is-outlined"><i class="las la-book-open"></i> คู่มือการเล่น</a>
                     </div>
-                    <span id="typed"></span>
-                </h3>
-                <a href="/shop/catalog" class="button is-primary is-outlined"><i class="las la-store-alt"></i> เข้าสู่ร้านค้า</a>
-                <a href="/docs" class="button is-info is-outlined"><i class="las la-book-open"></i> คู่มือการเล่น</a>
+                    <div class="column is-hidden-mobile">
+                        <img src="/assets/img/server_logo.png" class="animate__animated animate__pulse animate__infinite infinite" style="width: 100%;" alt="">
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@
     <script src="/assets/js/custom.js"></script>
     <script src="/assets/js/particles.js"></script>
     <script>
-        window.onload = function () {
+        window.onload = function() {
             Particles.init({
                 selector: '.background',
                 color: '#ffffff',
@@ -65,7 +73,6 @@
             loop: true,
             loopCount: Infinity,
         });
-
     </script>
 </body>
 

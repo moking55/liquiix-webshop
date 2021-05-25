@@ -7,7 +7,7 @@ else :
     require_once './configs/database.php';
 
     $playername = $_SESSION['PlayerName'];
-    $qry = "SELECT cmi_users.username,cmi_users.Balance FROM cmi_users WHERE username = '$playername'";
+    $qry = "SELECT username,Points FROM cmi_users WHERE username = '$playername'";
     $result = $dbcon->query($qry);
     $data = $result->fetch_assoc();
 
@@ -58,7 +58,7 @@ else :
                         <div class="p-3">
                             <img class="player-avatar" src="https://minotar.net/avatar/<?= $data['username'] ?>/100.png" alt="">
                             <p class="is-size-4"><b><?= $data['username'] ?></b></p>
-                            <p class="is-size-5"><i class="las la-coins"></i> <?= $data['Balance'] ?></p>
+                            <p class="is-size-5"><i class="las la-coins"></i> <?= $data['Points'] ?></p>
                             <p class="is-size-5 has-text-danger"><i class="las la-medal"></i> Not Premium</p>
                         </div>
                         <div class="p-3">
