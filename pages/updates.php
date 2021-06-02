@@ -47,7 +47,7 @@ session_start();
                 <?php
                 include './configs/database.php';
 
-                $qry = "SELECT * FROM news";
+                $qry = "SELECT * FROM news ORDER BY id DESC";
                 $result = $dbcon->query($qry);
 
                 while ($data = $result->fetch_assoc()) { ?>
@@ -81,6 +81,7 @@ session_start();
             <p class="copyright-text">Copyright © 2021 MC-Mart. All Rights Reserved</b></p>
         </div>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./assets/js/jquery-3.6.0.min.js"></script>
     <script src="./assets/js/custom.js"></script>
 </body>

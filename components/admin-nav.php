@@ -3,36 +3,27 @@
         General
     </p>
     <ul class="menu-list">
-        <li><a class="is-active">หน้าแรก</a></li>
-        <li><a>จัดการสินค้า</a></li>
-        <li><a>Other</a></li>
+        <li><a href="/admin">หน้าแรก</a></li>
+        <li><a href="/admin/products">จัดการสินค้า</a></li>
+        <li><a>คู่มือเซิร์ฟเวอร์</a></li>
     </ul>
     <p class="menu-label">
         Administration
     </p>
     <ul class="menu-list">
-        <li><a>Team Settings</a></li>
         <li>
-            <a>Manage Your Team</a>
+            <a>จัดการผู้เล่น</a>
             <ul>
-                <li><a>Members</a></li>
-                <li><a>Plugins</a></li>
-                <li><a>Add a member</a></li>
-                <li><a>Remove a member</a></li>
+                <li><a>Points</a></li>
             </ul>
         </li>
-        <li><a>Invitations</a></li>
-        <li><a>Cloud Storage Environment Settings</a></li>
-        <li><a>Authentication</a></li>
-        <li><a>Payments</a></li>
+        <li><a>รายงาน</a></li>
     </ul>
     <p class="menu-label">
         Transactions
     </p>
     <ul class="menu-list">
-        <li><a>Payments</a></li>
-        <li><a>Transfers</a></li>
-        <li><a>Balance</a></li>
-        <li><a>Reports</a></li>
+        <li><a>ประวัติทำรายการ</a></li>
+        <li><a>ประวัติการซื้อ</a></li>
     </ul>
 </aside>

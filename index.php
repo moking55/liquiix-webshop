@@ -31,5 +31,11 @@ Route::add('/admin',function(){
 Route::add('/admin/news/add',function(){
     include './pages/news-add.php';
 });
+Route::add('/admin/products/add',function(){
+    include './pages/product-add.php';
+});
+Route::add('/admin/products',function(){
+    include './pages/products.php';
+});
 
 Route::run('/');

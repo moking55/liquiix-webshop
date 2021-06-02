@@ -78,42 +78,43 @@ else :
                         <p class="panel-heading">
                             <i class="las la-store-alt"></i> ร้านค้า
                         </p>
-                        <div class="columns is-multiline p-3">
-                            <?php
-                            if ($result->num_rows > 0) {
-                                // output data of each row
-                                while ($data = $result->fetch_assoc()) { ?>
-                                    <div class="column is-4 p-2">
-                                        <div class="card">
-                                            <div class="card-image">
-                                                <figure class="image is-4by3">
-                                                    <img src="<?= $data["product_image"] ?>">
-                                                </figure>
+                        <form action="">
+                            <div class="columns is-multiline p-3">
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    // output data of each row
+                                    while ($data = $result->fetch_assoc()) { ?>
+                                        <div class="column is-4 p-2">
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <figure class="image is-4by3">
+                                                        <img src="<?= $data["product_image"] ?>">
+                                                    </figure>
+                                                </div>
+                                                <div class="card-content">
+                                                    <p class="subtitle">
+                                                        <?= $data["product_name"] ?>
+                                                        <hr>
+                                                        <?= $data["product_detail"] ?>
+                                                    </p>
+                                                </div>
+                                                <footer class="card-footer">
+                                                    <p class="card-footer-item">
+                                                        <span><?= $data["product_price"] ?> Point</span>
+                                                    </p>
+                                                    <a onclick="BuyItem(<?= $data['pid'] ?>,'<?= $playername ?>')" class="card-footer-item">
+                                                        ซื้อเลย
+                                                    </a>
+                                                </footer>
                                             </div>
-                                            <div class="card-content">
-                                                <p class="subtitle">
-                                                    <?= $data["product_name"] ?>
-                                                    <hr>
-                                                    <?= $data["product_detail"] ?>
-                                                </p>
-                                            </div>
-                                            <footer class="card-footer">
-                                                <p class="card-footer-item">
-                                                    <span><?= $data["product_price"] ?> Point</span>
-                                                </p>
-                                                <a class="card-footer-item">
-                                                    ซื้อเลย
-                                                </a>
-                                            </footer>
                                         </div>
-                                    </div>
-                            <?php
-                                }
-                            } else {
-                                echo "ไม่มีข้อมูล";
-                            } ?>
-                        </div>
-                        <!-- echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["lastname"] . "<br>"; -->
+                                <?php
+                                    }
+                                } else {
+                                    echo "ไม่มีข้อมูล";
+                                } ?>
+                            </div>
+                        </form>
 
 
                     </article>
@@ -135,6 +136,6 @@ else :
     </html>
 
 <?php
-$dbcon->close();
+    $dbcon->close();
 endif;
 ?>

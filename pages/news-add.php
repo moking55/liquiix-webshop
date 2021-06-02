@@ -49,19 +49,15 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                 </div>
             </div>
         </div>
-    <script src="/assets/js/jquery-3.6.0.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/assets/js/custom.js"></script>
-    <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-
-    <script>
-        CKEDITOR.replace('news_content');
-    </script>
+        <script src="/assets/js/jquery-3.6.0.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/assets/js/custom.js"></script>
+        <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     </body>
 
     </html>
 <?php
 else :
-    header('location: catalog');
+    header('location: shop/catalog');
 endif;
 ?>

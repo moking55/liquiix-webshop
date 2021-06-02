@@ -11,7 +11,7 @@ $data = $result->fetch_assoc();
 if (password_verify($password, $data['password']) && $result->num_rows > 0) {
     $_SESSION['PlayerName'] = $data['username'];
     $_SESSION['isLogin'] = true;
-    $isAdmin = ($data['is_admin'] === "1") ? $_SESSION['is_admin'] = 1 : null ;
+    $isAdmin = ($data['is_admin'] === "1") ? $_SESSION['is_admin'] = 1 : $_SESSION['is_admin'] = 0 ;
     echo json_encode(array('status' => '1', 'message' => 'เข้าสู่ระบบแล้ว'));
     $dbcon->close();
 } else {
