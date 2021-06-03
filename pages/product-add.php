@@ -52,137 +52,75 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                     <?php include './components/admin-nav.php' ?>
                 </div>
                 <div class="column is-9">
-                    <section class="hero is-info welcome is-small">
-                        <div class="hero-body">
-                            <div class="container">
-                                <h1 class="title">
-                                    Hello, <?= $_SESSION['PlayerName'] ?>
-                                </h1>
-                                <h2 class="subtitle">
-                                    I hope you are having a great day!
-                                </h2>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="info-tiles">
-                        <div class="tile is-ancestor has-text-centered">
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">s</p>
-                                    <p class="subtitle">Users</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">59k</p>
-                                    <p class="subtitle">Products</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">3.4k</p>
-                                    <p class="subtitle">Open Orders</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">19</p>
-                                    <p class="subtitle">Exceptions</p>
-                                </article>
-                            </div>
-                        </div>
-                    </section>
+                    <div class="notification is-warning">
+                        <b>สำคัญ:</b>
+                        <p>เมื่ออัพโหลดรูปภาพแล้วจะไม่สามารถแก้ไขภาพได้อีก</p>
+                    </div>
+
                     <div class="columns">
-                        <div class="column is-6">
-                            <div class="card events-card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        ข่าวสาร
-                                    </p>
-                                    <a href="#" class="card-header-icon" aria-label="more options">
-                                        <span class="icon">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                </header>
-                                <div class="card-table">
-                                    <div class="content">
-                                        <table class="table is-fullwidth is-striped">
-                                            <tbody>
-                                                <?php
-                                                include './configs/database.php';
-
-                                                $qry = "SELECT * FROM news";
-                                                $result = $dbcon->query($qry);
-
-                                                while ($data = $result->fetch_assoc()) { ?>
-                                                    <tr>
-                                                        <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                                        <td><?= $data['news_title'] ?></td>
-                                                        <td class="level-right"><a class="button is-small is-warning" href="#">แก้ไข</a><a class="button is-small is-danger" href="#">ลบ</a></td>
-                                                    </tr>
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <footer class="card-footer">
-                                    <a href="/admin/news/add" class="card-footer-item">เขียนใหม่</a>
-                                </footer>
-                            </div>
+                        <div class="column">
+                            <h2 class="is-size-3">ขั้นตอนการเพิ่มสินค้า</h2>
+                            <ol>
+                                <li>กรอก *ชื่อสินค้า / *ราคา / *คำสั่ง / รูปภาพ <span style="color: rgb(235, 107, 86);">( * ) หมายถึงจำเป็น</span></li>
+                                <li><span style="color: null;">คลิ๊กเพิ่มสินค้า เพื่อเป็นอันเสร็จสิ้น</span></li>
+                                <li><span style="color: null;">นั่งชิลๆจิบกาแฟยามบ่าย</span></li>
+                            </ol>
+                            <h2 class="is-size-3"><span style="color: null;">เรตราคา พอยต์(Point)</span></h2>
+                            <p>1 Point ต่อ 1 บาทไทย</p>
+                            <h2 class="is-size-3"><span style="color: null;">พารามิเตอร์</span></h2>
+                            <p>สามารถใส่ <b>[playerName]</b> แทนชื่อผู้เล่นเป้าหมายได้</p>
                         </div>
-                        <div class="column is-6">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        คู่มือการเล่น
-                                    </p>
-                                    <a href="#" class="card-header-icon" aria-label="more options">
-                                        <span class="icon">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                </header>
-                                <div class="card-content">
-                                    <div class="content">
-                                        <a class="button is-fullwidth">ตั้งค่าคู่มือการเล่น</a>
+                        <div class="column">
+                            <form name="product_form" id="product_form" enctype="multipart/form-data">
+                                <div class="box">
+                                    <div class="field">
+                                        <label class="label">ชื่อสินค้า</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Text input" name="p_name">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        User Search
-                                    </p>
-                                    <a href="#" class="card-header-icon" aria-label="more options">
-                                        <span class="icon">
-                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                </header>
-                                <div class="card-content">
-                                    <div class="content">
-                                        <div class="control has-icons-left has-icons-right">
-                                            <input class="input is-large" type="text" placeholder="">
-                                            <span class="icon is-medium is-left">
-                                                <i class="fa fa-search"></i>
-                                            </span>
-                                            <span class="icon is-medium is-right">
-                                                <i class="fa fa-check"></i>
+                                    <div class="field">
+                                        <label class="label">คำอธิบาย</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Text input" name="p_detail">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">ราคา</label>
+                                        <div class="control">
+                                            <input class="input" type="number" placeholder="Number input" name="p_price">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">คำสั่ง *ไม่ต้องมีเครื่องหมาย "/"</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="Text input" name="p_command">
+                                            <span class="icon is-small is-left">
+                                                /
                                             </span>
                                         </div>
                                     </div>
+                                    <div class="field">
+                                        <label class="label">รูปภาพ</label>
+                                        <div class="control">
+                                            <input class="input" type="file" name="p_image" id="p_image" accept="image/x-png,image/gif,image/jpeg">
+                                        </div>
+                                    </div>
+                                    <div class="field is-grouped">
+                                        <div class="control">
+                                            <button type="button" onclick="SaveProduct()" class="button is-link">Submit</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script async type="text/javascript" src="../js/bulma.js"></script>
+        <script src="/assets/js/jquery-3.6.0.min.js"></script>
+        <script async type="text/javascript" src="/assets/js/custom.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 
     </html>

@@ -36,7 +36,7 @@ function LoginChk() {
     } else {
         $.ajax({
             type: "POST",
-            url: "../functions/auth_check.php",
+            url: "/functions/auth_check.php",
             data: $("#login_form").serialize(),
             beforeSend: function () {
                 Swal.fire({
@@ -92,7 +92,7 @@ function LoginChk() {
 /* Logout */
 function logout() {
     $.ajax({
-        url: "../functions/logout.php",
+        url: "/functions/logout.php",
         success:
             Swal.fire({
                 title: 'สำเร็จ',
@@ -112,7 +112,7 @@ function logout() {
 function TW_Topup() {
     $.ajax({
         type: "POST",
-        url: "../functions/TruewalletHandler.php",
+        url: "/functions/TruewalletHandler.php",
         data: $("#TW_form").serialize(),
         beforeSend: function () {
             Swal.fire({
@@ -181,7 +181,6 @@ function removeActive() {
         $(this).removeClass("is-active");
     });
 }
-
 function hideAll() {
     $("#TW_form").addClass("is-hidden");
     $("#History").addClass("is-hidden");
@@ -191,7 +190,7 @@ function hideAll() {
 function AddNews() {
     $.ajax({
         type: "POST",
-        url: "../../functions/NewsAdd.php",
+        url: "/functions/NewsAdd.php",
         data: $("#news_form").serialize(),
         beforeSend: function () {
             Swal.fire({
@@ -256,7 +255,7 @@ function BuyItem(pid,playerName) {
         if (result.isConfirmed) {
             $.ajax({
                 type: "POST",
-                url: "../../functions/CommandSender.php",
+                url: "/functions/CommandSender.php",
                 data: {
                     product_id: pid,
                     username: playerName,
@@ -264,8 +263,6 @@ function BuyItem(pid,playerName) {
                 beforeSend: function () {
                     Swal.fire({
                         text: 'กำลังโหลด...',
-                        timer: 5000,
-                        timerProgressBar: true,
                         didOpen: () => {
                             Swal.showLoading()
                             timerInterval = setInterval(() => {
@@ -277,9 +274,6 @@ function BuyItem(pid,playerName) {
                                     }
                                 }
                             }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
                         },
                         allowOutsideClick: false
                     });
@@ -316,3 +310,102 @@ function BuyItem(pid,playerName) {
 
 }
 
+function SaveProduct() {
+    var data = new FormData();
+
+    //Form data
+    var form_data = $('#product_form').serializeArray();
+    $.each(form_data, function (key, input) {
+        data.append(input.name, input.value);
+    });
+    
+    //File data
+    var file_data = $('input[name="p_image"]')[0].files;
+    for (var i = 0; i < file_data.length; i++) {
+        data.append("p_image[]", file_data[i]);
+    }
+    
+    //Custom data
+    data.append('key', 'value');
+
+    $.ajax({
+        url: "/functions/AddProduct.php",
+        method: "post",
+        processData: false,
+        contentType: false,
+        data: data,
+        success: function (data) {
+            if (data.status == 1) // Success
+            {
+                Swal.fire({
+                    title: data.info,
+                    text: 'เพิ่มสินค้าสำเร็จแล้ว',
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                    allowOutsideClick: false
+                }).then((data) => {
+                    if (data.isConfirmed) {
+                        window.location.replace('/admin/products')
+                    }
+                })
+            } else // Err
+            {
+                Swal.fire({
+                    title: 'เกิดข้อผิดพลาด',
+                    text: data.info,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                })
+            }
+        }
+/*     $.ajax({
+        type: "POST",
+        url: "/functions/AddProduct.php",
+        data: $("#product_form").serialize(),
+        beforeSend: function () {
+            Swal.fire({
+                text: 'กำลังโหลด...',
+                didOpen: () => {
+                    Swal.showLoading()
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getHtmlContainer()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                            }
+                        }
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                },
+                allowOutsideClick: false
+            });
+        },
+        success: function (result) {
+            if (result.status == "success") // Success
+            {
+                Swal.fire({
+                    title: result.info,
+                    text: 'เพิ่มสินค้าสำเร็จแล้ว',
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.replace('/admin/products')
+                    }
+                })
+            } else // Err
+            {
+                Swal.fire({
+                    title: 'เกิดข้อผิดพลาด',
+                    text: result.info,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                })
+            }
+        } */
+    });
+}

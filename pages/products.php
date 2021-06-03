@@ -1,7 +1,11 @@
 <?php
 
 session_start();
-if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
+if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
+    include './configs/database.php';
+    $result = $dbcon->query("SELECT pid,product_name,product_price,product_command FROM products");
+
+?>
     <!DOCTYPE html>
     <html>
 
@@ -56,48 +60,46 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                         <div class="hero-body">
                             <div class="container">
                                 <h1 class="title">
-                                    Hello, <?= $_SESSION['PlayerName'] ?>
+                                    จัดการสินค้า
                                 </h1>
                                 <h2 class="subtitle">
-                                    I hope you are having a great day!
+                                    <a class="button" href="/admin/products/add">เพิ่มสินค้า</a>
                                 </h2>
                             </div>
                         </div>
                     </section>
                     <div class="box">
                         <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-64x64">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                                </figure>
-                            </div>
                             <div class="media-content">
                                 <div class="content">
-                                    <p>
-                                        <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                        <br>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-                                    </p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th><abbr title="Product ID">PID</abbr></th>
+                                                <th>Name</th>
+                                                <th>Price (Points)</th>
+                                                <th>Command</th>
+                                                <th colspan="2">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            while ($data = $result->fetch_assoc()) { ?>
+                                                <tr>
+                                                    <th><?= $data['pid'] ?></th>
+                                                    <td><?= $data['product_name'] ?></td>
+                                                    <td><?= $data['product_price'] ?></td>
+                                                    <td><?= "/" . $data['product_command'] ?></td>
+                                                    <td><a href="/admin/products/add">แก้ไข</a></td>
+                                                    <td><a class="text-danger" onclick="DeleteProduct(<?= $data['pid'] ?>)">ลบ</a></td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+
                                 </div>
-                                <nav class="level is-mobile">
-                                    <div class="level-left">
-                                        <a class="level-item" aria-label="reply">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-reply" aria-hidden="true"></i>
-                                            </span>
-                                        </a>
-                                        <a class="level-item" aria-label="retweet">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-retweet" aria-hidden="true"></i>
-                                            </span>
-                                        </a>
-                                        <a class="level-item" aria-label="like">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-heart" aria-hidden="true"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </nav>
                             </div>
                         </article>
                     </div>
@@ -105,7 +107,9 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                 </div>
             </div>
         </div>
-        <script async type="text/javascript" src="../js/bulma.js"></script>
+        <script src="/assets/js/jquery-3.6.0.min.js"></script>
+        <script async type="text/javascript" src="/assets/js/custom.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 
     </html>

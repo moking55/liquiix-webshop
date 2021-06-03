@@ -9,8 +9,6 @@ $ws->password = "Tawan777@";
 $productID = $_POST['product_id'];
 $player = $_POST['username'];
 
-
-
 if ($ws->connect() && !empty($player)) {
     $result = $dbcon->query("SELECT product_command,product_price FROM products WHERE pid = '" . $productID . "'");
     $products = $result->fetch_assoc();
