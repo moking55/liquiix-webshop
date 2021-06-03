@@ -28,11 +28,17 @@ Route::add('/news',function(){
 Route::add('/admin',function(){
     include './pages/admin-index.php';
 });
+Route::add('/admin/topup',function(){
+    include './pages/admin-topup.php';
+});
 Route::add('/admin/news/add',function(){
     include './pages/news-add.php';
 });
 Route::add('/admin/products/add',function(){
     include './pages/product-add.php';
+});
+Route::add('/admin/products/edit',function(){
+    include './pages/product-edit.php';
 });
 Route::add('/admin/products',function(){
     include './pages/products.php';

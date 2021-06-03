@@ -242,8 +242,60 @@ function AddNews() {
     });
 }
 
+/* Remove News */
+function DeleteNews(id) {
+    Swal.fire({
+        title: 'คุณต้องการลบข่าวนี้หรือไม่',
+        icon: 'info',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: `ตกลง`,
+        denyButtonText: `ยกเลิก`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "/functions/RemoveNews.php",
+                data: {
+                    id: id
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        text: 'กำลังโหลด...',
+                        allowOutsideClick: false
+                    });
+                },
+                success: function (result) {
+                    if (result.status == 1) // Success
+                    {
+                        Swal.fire({
+                            title: 'สำเร็จ',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'ตกลง',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.replace('/admin')
+                            }
+                        })
+                    } else // Err
+                    {
+                        Swal.fire({
+                            title: 'เกิดข้อผิดพลาด',
+                            text: result.message,
+                            icon: 'error',
+                            confirmButtonText: 'ตกลง',
+                        })
+                    }
+                }
+            });
+        }
+    })
+}
+
 /* Buyitem */
-function BuyItem(pid,playerName) {
+function BuyItem(pid, playerName) {
     Swal.fire({
         title: 'คุณต้องการซื้อสินค้านี้หรือไม่',
         icon: 'info',
@@ -310,6 +362,7 @@ function BuyItem(pid,playerName) {
 
 }
 
+/* Save new product */
 function SaveProduct() {
     var data = new FormData();
 
@@ -318,13 +371,13 @@ function SaveProduct() {
     $.each(form_data, function (key, input) {
         data.append(input.name, input.value);
     });
-    
+
     //File data
     var file_data = $('input[name="p_image"]')[0].files;
     for (var i = 0; i < file_data.length; i++) {
         data.append("p_image[]", file_data[i]);
     }
-    
+
     //Custom data
     data.append('key', 'value');
 
@@ -338,7 +391,7 @@ function SaveProduct() {
             if (data.status == 1) // Success
             {
                 Swal.fire({
-                    title: data.info,
+                    title: data.message,
                     text: 'เพิ่มสินค้าสำเร็จแล้ว',
                     icon: 'success',
                     confirmButtonText: 'ตกลง',
@@ -352,19 +405,26 @@ function SaveProduct() {
             {
                 Swal.fire({
                     title: 'เกิดข้อผิดพลาด',
-                    text: data.info,
+                    text: data.message,
                     icon: 'error',
                     confirmButtonText: 'ตกลง',
                 })
             }
         }
-/*     $.ajax({
+    });
+}
+
+/* Edit Product */
+function EditProduct() {
+    $.ajax({
         type: "POST",
-        url: "/functions/AddProduct.php",
-        data: $("#product_form").serialize(),
+        url: "/functions/Addproduct.php",
+        data: $("#product_edit_form").serialize(),
         beforeSend: function () {
             Swal.fire({
                 text: 'กำลังโหลด...',
+                timer: 5000,
+                timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
                     timerInterval = setInterval(() => {
@@ -384,11 +444,11 @@ function SaveProduct() {
             });
         },
         success: function (result) {
-            if (result.status == "success") // Success
+            if (result.status == 1) // Success
             {
                 Swal.fire({
-                    title: result.info,
-                    text: 'เพิ่มสินค้าสำเร็จแล้ว',
+                    title: 'สำเร็จ',
+                    text: result.message,
                     icon: 'success',
                     confirmButtonText: 'ตกลง',
                     allowOutsideClick: false
@@ -401,11 +461,63 @@ function SaveProduct() {
             {
                 Swal.fire({
                     title: 'เกิดข้อผิดพลาด',
-                    text: result.info,
+                    text: result.message,
                     icon: 'error',
                     confirmButtonText: 'ตกลง',
                 })
             }
-        } */
+        }
     });
+}
+
+/* Remove Product */
+function DeleteProduct(pid) {
+    Swal.fire({
+        title: 'คุณต้องการลบสินค้านี้หรือไม่',
+        icon: 'info',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: `ตกลง`,
+        denyButtonText: `ยกเลิก`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "/functions/Removeproduct.php",
+                data: {
+                    id: pid
+                },
+                beforeSend: function () {
+                    Swal.fire({
+                        text: 'กำลังโหลด...',
+                        allowOutsideClick: false
+                    });
+                },
+                success: function (result) {
+                    if (result.status == 1) // Success
+                    {
+                        Swal.fire({
+                            title: 'สำเร็จ',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'ตกลง',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.replace('/admin/products')
+                            }
+                        })
+                    } else // Err
+                    {
+                        Swal.fire({
+                            title: 'เกิดข้อผิดพลาด',
+                            text: result.message,
+                            icon: 'error',
+                            confirmButtonText: 'ตกลง',
+                        })
+                    }
+                }
+            });
+        }
+    })
 }

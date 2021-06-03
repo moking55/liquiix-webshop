@@ -64,35 +64,7 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                             </div>
                         </div>
                     </section>
-                    <section class="info-tiles">
-                        <div class="tile is-ancestor has-text-centered">
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">s</p>
-                                    <p class="subtitle">Users</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">59k</p>
-                                    <p class="subtitle">Products</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">3.4k</p>
-                                    <p class="subtitle">Open Orders</p>
-                                </article>
-                            </div>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <p class="title">19</p>
-                                    <p class="subtitle">Exceptions</p>
-                                </article>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="columns">
+                    <div class="columns mt-3">
                         <div class="column is-6">
                             <div class="card events-card">
                                 <header class="card-header">
@@ -119,7 +91,7 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                                                     <tr>
                                                         <td width="5%"><i class="fa fa-bell-o"></i></td>
                                                         <td><?= $data['news_title'] ?></td>
-                                                        <td class="level-right"><a class="button is-small is-warning" href="#">แก้ไข</a><a class="button is-small is-danger" href="#">ลบ</a></td>
+                                                        <td><a class="button is-small is-danger" onclick="DeleteNews(<?= $data['id'] ?>)">ลบ</a></td>
                                                     </tr>
                                                 <?php
                                                 }
@@ -148,7 +120,7 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                                 </header>
                                 <div class="card-content">
                                     <div class="content">
-                                        <a class="button is-fullwidth">ตั้งค่าคู่มือการเล่น</a>
+                                        <a href="<?= $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https' ? 'https://' : 'http://' . "docs." . $_SERVER['HTTP_HOST']."/dash.php?accesskey=8a611467800570dfefb66d8eae2971f4" ?>" class="button is-fullwidth">ตั้งค่าคู่มือการเล่น</a>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +154,9 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                 </div>
             </div>
         </div>
-        <script async type="text/javascript" src="../js/bulma.js"></script>
+        <script src="/assets/js/jquery-3.6.0.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/assets/js/custom.js"></script>
     </body>
 
     </html>

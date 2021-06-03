@@ -1,11 +1,7 @@
 <?php
 
 session_start();
-if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
-    include './configs/database.php';
-    $result = $dbcon->query("SELECT pid,product_name,product_price,product_command FROM products");
-
-?>
+if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
     <!DOCTYPE html>
     <html>
 
@@ -60,11 +56,8 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
                         <div class="hero-body">
                             <div class="container">
                                 <h1 class="title">
-                                    จัดการสินค้า
+                                    ประวัติการเติมเงินทั้งหมด
                                 </h1>
-                                <h2 class="subtitle">
-                                    <a class="button" href="/admin/products/add">เพิ่มสินค้า</a>
-                                </h2>
                             </div>
                         </div>
                     </section>
@@ -72,33 +65,45 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    <table class="table">
+                                    <table class="table is-fullwidth">
                                         <thead>
                                             <tr>
-                                                <th><abbr title="Product ID">PID</abbr></th>
-                                                <th>Name</th>
-                                                <th>Price (Points)</th>
-                                                <th>Command</th>
-                                                <th colspan="2">Actions</th>
+                                                <th>#</th>
+                                                <th>วันที่ทำรายการ</th>
+                                                <th>ชื่อผู้ทำรายการ</th>
+                                                <th>จ่ายด้วย</th>
+                                                <th>จำนวนเงิน</th>
+                                                <th>สถานะ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            while ($data = $result->fetch_assoc()) { ?>
-                                                <tr>
-                                                    <th><?= $data['pid'] ?></th>
-                                                    <td><?= $data['product_name'] ?></td>
-                                                    <td><?= $data['product_price'] ?></td>
-                                                    <td><?= "/" . $data['product_command'] ?></td>
-                                                    <td><a href="/admin/products/edit?pid=<?= $data['pid'] ?>">แก้ไข</a></td>
-                                                    <td><a class="text-danger" onclick="DeleteProduct(<?= $data['pid'] ?>)">ลบ</a></td>
-                                                </tr>
-                                            <?php
-                                            }
+
+                                            require_once './configs/database.php';
+
+                                            $result = $dbcon->query("SELECT * FROM topup_history ORDER BY date DESC LIMIT 25");
+
+                                            if ($result->num_rows > 0) {
+                                                while ($data = $result->fetch_assoc()) {
                                             ?>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td><?= $data['date'] ?></td>
+                                                        <td><?= $data['player_name'] ?></td>
+                                                        <td><?= $data['medthod'] ?></td>
+                                                        <td><?= $data['amount'] ?></td>
+                                                        <td>
+
+                                                            <?= $payment_status = ($data['status'] == "success") ? '<span class="tag is-primary">สำเร็จ</span>' : '<span class="tag is-danger">ล้มเหลว</span>'; ?>
+
+                                                        </td>
+                                                    </tr>
+                                            <?php }
+                                            } else {
+                                                echo null;
+                                            } ?>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </article>
@@ -108,8 +113,8 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
             </div>
         </div>
         <script src="/assets/js/jquery-3.6.0.min.js"></script>
-        <script async type="text/javascript" src="/assets/js/custom.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/assets/js/custom.js"></script>
     </body>
 
     </html>

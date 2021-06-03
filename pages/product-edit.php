@@ -1,7 +1,12 @@
 <?php
 
 session_start();
-if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
+$ProductID = $_GET['pid'];
+if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) :
+    require_once './configs/database.php';
+    $result = $dbcon->query("SELECT * FROM products WHERE pid='" . $ProductID . "'");
+    $data = $result->fetch_assoc();
+?>
     <!DOCTYPE html>
     <html>
 
@@ -52,63 +57,58 @@ if ($_SESSION['isLogin'] === true && $_SESSION['is_admin'] === 1) : ?>
                     <?php include './components/admin-nav.php' ?>
                 </div>
                 <div class="column is-9">
-                    <div class="notification is-warning">
+                    <div class="notification is-danger">
                         <b>สำคัญ:</b>
-                        <p>เมื่ออัพโหลดรูปภาพแล้วจะไม่สามารถแก้ไขภาพได้อีก</p>
+                        <p>รูปภาพสินค้าจะไม่สามารถแก้ไขได้อีก หากต้องการเปลี่ยนรูปโปรดลบสินค้าแล้วลงใหม่</p>
                     </div>
 
                     <div class="columns">
                         <div class="column">
-                            <h2 class="is-size-3">ขั้นตอนการเพิ่มสินค้า</h2>
-                            <ol>
-                                <li>กรอก *ชื่อสินค้า / *ราคา / *คำสั่ง / รูปภาพ <span style="color: rgb(235, 107, 86);">( * ) หมายถึงจำเป็น</span></li>
-                                <li><span style="color: null;">คลิ๊กเพิ่มสินค้า เพื่อเป็นอันเสร็จสิ้น</span></li>
-                                <li><span style="color: null;">นั่งชิลๆจิบกาแฟยามบ่าย</span></li>
-                            </ol>
+                            <img src="<?= $data['product_image'] ?>" alt="">
                             <h2 class="is-size-3"><span style="color: null;">เรตราคา พอยต์(Point)</span></h2>
                             <p>1 Point ต่อ 1 บาทไทย</p>
                             <h2 class="is-size-3"><span style="color: null;">พารามิเตอร์</span></h2>
                             <p>สามารถใส่ <b>[Player]</b> แทนชื่อผู้เล่นเป้าหมายได้</p>
                         </div>
                         <div class="column">
-                            <form name="product_form" id="product_form" enctype="multipart/form-data">
+                            <form name="product_edit_form" id="product_edit_form">
                                 <div class="box">
+                                    <div class="field">
+                                        <label class="label">PID</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Text input" name="pid" value="<?= $data['pid'] ?>" readonly>
+                                        </div>
+                                    </div>
                                     <div class="field">
                                         <label class="label">ชื่อสินค้า</label>
                                         <div class="control">
-                                            <input class="input" type="text" placeholder="Text input" name="p_name">
+                                            <input class="input" type="text" placeholder="Text input" name="p_name" value="<?= $data['product_name'] ?>">
                                         </div>
                                     </div>
                                     <div class="field">
                                         <label class="label">คำอธิบาย</label>
                                         <div class="control">
-                                            <input class="input" type="text" placeholder="Text input" name="p_detail">
+                                            <input class="input" type="text" placeholder="Text input" name="p_detail" value="<?= $data['product_detail'] ?>">
                                         </div>
                                     </div>
                                     <div class="field">
                                         <label class="label">ราคา</label>
                                         <div class="control">
-                                            <input class="input" type="number" placeholder="Number input" name="p_price">
+                                            <input class="input" type="number" placeholder="Number input" name="p_price" value="<?= $data['product_price'] ?>">
                                         </div>
                                     </div>
                                     <div class="field">
                                         <label class="label">คำสั่ง *ไม่ต้องมีเครื่องหมาย "/"</label>
                                         <div class="control has-icons-left">
-                                            <input class="input" type="text" placeholder="Text input" name="p_command">
+                                            <input class="input" type="text" placeholder="Text input" name="p_command" value="<?= $data['product_command'] ?>">
                                             <span class="icon is-small is-left">
                                                 /
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="field">
-                                        <label class="label">รูปภาพ</label>
-                                        <div class="control">
-                                            <input class="input" type="file" name="p_image" id="p_image" accept="image/x-png,image/gif,image/jpeg">
-                                        </div>
-                                    </div>
                                     <div class="field is-grouped">
                                         <div class="control">
-                                            <button type="button" onclick="SaveProduct()" class="button is-link">Submit</button>
+                                            <button type="button" onclick="EditProduct()" class="button is-link">Submit</button>
                                         </div>
                                     </div>
                                 </div>

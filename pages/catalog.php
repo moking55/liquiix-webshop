@@ -88,7 +88,7 @@ else :
                                             <div class="card">
                                                 <div class="card-image">
                                                     <figure class="image is-4by3">
-                                                        <img src="<?= $data["product_image"] ?>">
+                                                        <img style="object-fit: cover;" src="<?= $img = (empty($data["product_image"])) ? "/assets/img/NoImage.png" : $data["product_image"] ; ?>">
                                                     </figure>
                                                 </div>
                                                 <div class="card-content">
